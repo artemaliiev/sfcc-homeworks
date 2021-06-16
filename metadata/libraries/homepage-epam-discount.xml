@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="RefArchSharedLibrary">
+
+    <content content-id="homepage-epam-discount">
+        <display-name xml:lang="x-default">Homepage epam discount</display-name>
+        <online-flag>true</online-flag>
+        <online-flag site-id="RefArch">true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h4 style="text-align: center;"&gt;&lt;strong&gt;Special discount for EPAM employees - up to 50%&lt;/strong&gt;&lt;/h4&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
+
+</library>
