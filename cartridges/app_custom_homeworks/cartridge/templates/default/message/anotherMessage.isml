@@ -1,0 +1,2 @@
+
+<isprint value="${"Another message" + Date.now()}" />
