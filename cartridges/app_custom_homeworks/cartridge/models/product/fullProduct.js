@@ -1,6 +1,6 @@
 'use strict';
 
-var productBadges = require('./decorators/productBadges');
+var badges = require('./decorators/badges');
 var originalFullProduct = require('app_storefront_base/cartridge/models/product/fullProduct');
 
 module.exports = function fullProduct(product, apiProduct, options) {
@@ -10,8 +10,7 @@ module.exports = function fullProduct(product, apiProduct, options) {
     }
 
     var decoratedProduct = originalFullProduct(product, apiProduct, options);
-    productBadges(product, apiProduct.attributeModel)
-    // colorAvailability(decoratedProduct, options.quantity, apiProduct.minOrderQuantity.value, apiProduct);
+    badges(product, apiProduct);
 
     return decoratedProduct;
 };
