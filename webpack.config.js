@@ -38,8 +38,7 @@ var path = require('path');
                         loader: 'sass-loader',
                         options: {
                             includePaths: [
-                                path.resolve(process.cwd(), '../storefront-reference-architecture/node_modules/'),
-                                path.resolve(process.cwd(), '../storefront-reference-architecture/node_modules/flag-icon-css/sass')
+                                path.resolve(process.cwd(), '../homeworks/node_modules/')
                             ]
                         }
                     }]
