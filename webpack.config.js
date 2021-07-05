@@ -35,7 +35,12 @@ var path = require('path');
                             ]
                         }
                     }, {
-                        loader: 'sass-loader'
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: [
+                                path.resolve(process.cwd(), '../homeworks/node_modules/')
+                            ]
+                        }
                     }]
                 })
             }]
