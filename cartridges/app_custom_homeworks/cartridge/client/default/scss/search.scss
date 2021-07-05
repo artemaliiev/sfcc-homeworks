@@ -1,0 +1,9 @@
+@import '../../../../../app_storefront_base/cartridge/client/default/scss/search';
+@import './product/detail';
+
+.refinement-bar {
+    @include media-breakpoint-up(md) {
+        display: block !important;
+        position: relative;
+    }
+}
