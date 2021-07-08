@@ -1160,6 +1160,50 @@ label.availability {
   .product-badges .product-badges .Sale {
     background-color: #00ff00; }
 
+.product-detail .attributes .swatch-square {
+  width: 2.5em;
+  height: 2.5em;
+  background: #fff;
+  border: 0.1em solid rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  margin-right: 0.313em;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
+  .product-detail .attributes .swatch-square::after {
+    content: ''; }
+  .product-detail .attributes .swatch-square.selected {
+    border-color: #333; }
+  .product-detail .attributes .swatch-square.unselectable {
+    background-color: #495057;
+    cursor: not-allowed; }
+
+.quantity-form {
+  -ms-flex-align: center;
+      align-items: center; }
+
+.quantity-input {
+  width: 2.5rem;
+  padding: 0;
+  border: none;
+  text-align: center; }
+  .quantity-input:disabled {
+    background: none; }
+
+.quantity-button {
+  -ms-flex-pack: center;
+      justify-content: center;
+  height: 1.875rem;
+  width: 1.875rem;
+  background: none;
+  border: 1px solid #444; }
+
 @media (min-width: 769px) {
   .refinement-bar {
     display: block !important;

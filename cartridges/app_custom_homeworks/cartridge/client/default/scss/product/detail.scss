@@ -36,3 +36,56 @@
         background-color: #00ff00;
     }
 }
+
+.product-detail {
+    .attributes {
+        .swatch-square {
+            width: 2.5em;
+            height: 2.5em;
+            background: #fff;
+            border: 0.1em solid rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            margin-right: 0.313em;
+            position: relative;
+            display: flex;
+            align-content: stretch;
+            justify-content: center;
+            align-items: center;
+
+            &::after {
+                content: '';
+            }
+
+            &.selected {
+                border-color: #333;
+            }
+
+            &.unselectable {
+                background-color: #495057;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.quantity-form {
+    align-items: center;
+}
+
+.quantity-input {
+    width: 2.5rem;
+    padding: 0;
+    border: none;
+    text-align: center;
+    &:disabled {
+        background: none;
+    }
+}
+
+.quantity-button {
+    justify-content: center;
+    height: 1.875rem;
+    width: 1.875rem;
+    background: none;
+    border: 1px solid #444;
+}

@@ -1,6 +1,7 @@
 'use strict';
 
 var badges = require('./decorators/badges');
+var quantityInput = require('./decorators/quantityInput');
 var originalFullProduct = require('app_storefront_base/cartridge/models/product/fullProduct');
 
 module.exports = function fullProduct(product, apiProduct, options) {
@@ -11,6 +12,7 @@ module.exports = function fullProduct(product, apiProduct, options) {
 
     var decoratedProduct = originalFullProduct(product, apiProduct, options);
     badges(product, apiProduct);
+    quantityInput(product, apiProduct.stepQuantity.value, options.variables, options.options)
 
     return decoratedProduct;
 };

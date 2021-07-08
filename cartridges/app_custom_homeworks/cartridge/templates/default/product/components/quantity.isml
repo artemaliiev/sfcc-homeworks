@@ -1,0 +1,26 @@
+<label for="quantity-${loopState && loopState.count ? loopState.count : '1'}">${Resource.msg('label.quantity', 'common', null)}</label>
+<select class="quantity-select custom-select form-control"
+    id="quantity-${loopState && loopState.count ? loopState.count : '1'}">
+    <isloop items="${product.quantities}" var="quantity">
+        <option value="${quantity.value}" <isif condition="${product.productType !== 'bundle'}">
+            data-url="${quantity.url}"</isif>
+            ${quantity.selected ? 'selected' : ''}
+            >
+            ${quantity.value}
+        </option>
+    </isloop>
+</select>
+
+<iscomment> ${product.quantity} </iscomment>
+<iscomment> ${out.print( JSON.stringify(product.quantityInput.value) )} </iscomment>
+<label for="quantity-1">${Resource.msg('label.quantity', 'common', null)}</label>
+<div class="quantity-form d-flex">
+    <button class="quantity-button quantity-decrease">-</button>
+    <input type="text" class="quantity-input form-control"
+        id="quantity-1"
+        disabled="disabled"
+        name="quantity"
+        data-url="${product.quantityInput.url}"
+         data-minqty="${product.minOrderQuantity}" data-maxqty="${product.maxOrderQuantity}" value="${product.quantityInput.value}">
+    <button class="quantity-button quantity-increase">+</button>
+</div>
