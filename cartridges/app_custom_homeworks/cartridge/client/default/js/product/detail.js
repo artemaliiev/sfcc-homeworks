@@ -19,9 +19,7 @@ module.exports = {
     addToCart: base.addToCart,
 
     updateAttributesAndDetails: function () {
-        console.log(`detail-22`)
         $('body').on('product:statusUpdate', function (e, data) {
-            console.log(`detail-24`)
             var $productContainer = $('.product-detail[data-pid="' + data.id + '"]');
 
             $productContainer.find('.description-and-detail .product-attributes')
@@ -58,9 +56,7 @@ module.exports = {
         });
     },
     updateAttribute: function () {
-        console.log(`detail-59`)
         $('body').on('product:afterAttributeSelect', function (e, response) {
-            console.log(`detail-60`)
             if ($('.product-detail>.bundle-items').length) {
                 response.container.data('pid', response.data.product.id);
                 response.container.find('.product-id').text(response.data.product.id);

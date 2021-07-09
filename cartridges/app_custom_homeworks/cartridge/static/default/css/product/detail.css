@@ -592,22 +592,41 @@ label.availability {
     background-color: #495057;
     cursor: not-allowed; }
 
-.quantity-form {
+.product-detail .modal {
+  background: rgba(0, 0, 0, 0.3); }
+  .product-detail .modal.show {
+    display: block; }
+  .product-detail .modal .modal-content {
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s; }
+
+.product-detail .quantity-form {
   -ms-flex-align: center;
       align-items: center; }
 
-.quantity-input {
+.product-detail .quantity-input {
   width: 2.5rem;
   padding: 0;
   border: none;
   text-align: center; }
-  .quantity-input:disabled {
+  .product-detail .quantity-input:disabled {
     background: none; }
 
-.quantity-button {
+.product-detail .quantity-button {
+  text-align: center;
   -ms-flex-pack: center;
       justify-content: center;
   height: 1.875rem;
   width: 1.875rem;
   background: none;
   border: 1px solid #444; }
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }

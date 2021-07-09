@@ -1,7 +1,8 @@
 'use strict';
 
-var processInclude = require('../../../../../app_storefront_base/cartridge/client/default/js/util');
+var processInclude = require('./util');
 
 $(document).ready(function () {
     processInclude(require('./product/detail'));
+    processInclude(require('./product/sizePopUp'));
 });

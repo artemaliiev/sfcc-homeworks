@@ -1,8 +1,5 @@
 'use strict';
-
-// var focusHelper = require('../../../../../../app_storefront_base/cartridge/client/default/js/components/focus');
-
-var baseModule = require('../../../../../../app_storefront_base/cartridge/client/default/js/product/base');
+var focusHelper = require('../components/focus');
 
 /**
  * Retrieves the relevant pid value
@@ -11,6 +8,7 @@ var baseModule = require('../../../../../../app_storefront_base/cartridge/client
  */
 function getPidValue($el) {
     var pid;
+
     if ($('#quickViewModal').hasClass('show') && !$('.product-set').length) {
         pid = $($el).closest('.modal-content').find('.product-quickview').data('pid');
     } else if ($('.product-set-detail').length || $('.product-set').length) {
@@ -30,17 +28,17 @@ function getPidValue($el) {
 function getQuantitySelector($el) {
     var quantitySelected;
     if ($el && $('.set-items').length) {
-        quantitySelected = $($el).closest('.product-detail').find('.quantity-input');
+        quantitySelected = $($el).closest('.product-detail').find('.js-quantity-input');
     } else if ($el && $('.product-bundle').length) {
-        var quantitySelectedModal = $($el).closest('.modal-footer').find('.quantity-select');
-        var quantitySelectedPDP = $($el).closest('.bundle-footer').find('.quantity-input');
+        var quantitySelectedModal = $($el).closest('.modal-footer').find('.js-quantity-input');
+        var quantitySelectedPDP = $($el).closest('.bundle-footer').find('.js-quantity-input');
         if (quantitySelectedModal.val() === undefined) {
             quantitySelected = quantitySelectedPDP;
         } else {
             quantitySelected = quantitySelectedModal;
         }
     } else {
-        quantitySelected = $('.quantity-input');
+        quantitySelected = $('.js-quantity-input');
     }
     return quantitySelected;
 }
@@ -136,7 +134,7 @@ function processNonSwatchValues(attr, $productContainer) {
  */
 function updateAttrs(attrs, $productContainer, msgs) {
     // Currently, the only attribute type that has image swatches is Color.
-    var attrsWithSwatches = ['color'];
+    var attrsWithSwatches = ['color', 'size'];
 
     attrs.forEach(function (attr) {
         if (attrsWithSwatches.indexOf(attr.id) > -1) {
@@ -326,12 +324,6 @@ function handleVariantResponse(response, $productContainer) {
  */
 function updateQuantities(quantityInput, $productContainer) {
     if ($productContainer.parent('.bonus-product-item').length <= 0) {
-        // var optionsHtml = quantities.map(function (quantity) {
-        //     var selected = quantity.selected ? ' selected ' : '';
-        //     return '<option value="' + quantity.value + '"  data-url="' + quantity.url + '"' +
-        //         selected + '>' + quantity.value + '</option>';
-        // }).join('');
-        // getQuantitySelector($productContainer).empty().html(optionsHtml);
         const quantitySelector = getQuantitySelector($productContainer);
         quantitySelector.data('url', quantityInput.url);
         quantitySelector.val(quantityInput.value);
@@ -598,10 +590,8 @@ module.exports = {
     },
 
     sizeAttribute: function () {
-        $(document).on('click', '[data-attr="size"] button', function (e) {
-            console.log('testtest')
+        $(document).on('click', '.js-size-attr button', function (e) {
             e.preventDefault();
-            console.log('testtest1')
             if ($(this).attr('disabled')) {
                 return;
             }
@@ -610,7 +600,6 @@ module.exports = {
                 $productContainer = $(this).closest('.product-detail');
             }
 
-            console.log('asdsada1')
             attributeSelect($(this).attr('data-url'), $productContainer);
         });
     },
@@ -628,19 +617,14 @@ module.exports = {
     },
 
     availability: function () {
-
-        $(document).on('click', '.quantity-button', function (e) {
+        $(document).on('click', '.js-quantity-button', function (e) {
             e.preventDefault();
-            const productQuantityInput = $(this).closest('.product-detail').find('.quantity-input');
+            const productQuantityInput = $(this).closest('.product-detail').find('.js-quantity-input');
             const minQuantity = parseInt(productQuantityInput.data('minqty'));
             const maxQuantity = parseInt(productQuantityInput.data('maxqty'));
             let url = productQuantityInput.data('url');
             let productQuantity = parseInt(productQuantityInput.val());
 
-            var $productContainer = $(this).closest('.product-detail');
-            if (!$productContainer.length) {
-                $productContainer = $(this).closest('.modal-content').find('.product-quickview');
-            }
             if ($(this).hasClass('quantity-increase')) {
                 if (productQuantity === maxQuantity) {
                     return;
@@ -652,30 +636,18 @@ module.exports = {
                 }
                 productQuantity--;
             }
-
             url = `${url}&quantity=${productQuantity}`;
+
+            let $productContainer = $(this).closest('.product-detail');
+            if (!$productContainer.length) {
+                $productContainer = $(this).closest('.modal-content').find('.product-quickview');
+            }
 
             if ($('.bundle-items', $productContainer).length === 0) {
                 attributeSelect(url,
                     $productContainer);
             }
         });
-
-        // $(document).on('change', '.quantity-select', function (e) {
-        //     e.preventDefault();
-
-        //     var $productContainer = $(this).closest('.product-detail');
-        //     if (!$productContainer.length) {
-        //         $productContainer = $(this).closest('.modal-content').find('.product-quickview');
-        //     }
-
-        //     if ($('.bundle-items', $productContainer).length === 0) {
-        //         console.log('asdsada3')
-        //         attributeSelect($(e.currentTarget).find('option:selected').data('url'),
-        //             $productContainer);
-        //     }
-        //     console.log('asdsada4')
-        // });
     },
 
     addToCart: function () {
