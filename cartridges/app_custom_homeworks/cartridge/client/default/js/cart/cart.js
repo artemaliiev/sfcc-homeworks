@@ -755,6 +755,7 @@ module.exports = function () {
 
     base.selectAttribute();
     base.colorAttribute();
+    base.sizeAttribute();
     base.removeBonusProduct();
     base.selectBonusProduct();
     base.enableBonusProductSelection();

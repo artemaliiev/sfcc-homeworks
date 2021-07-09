@@ -1,0 +1,132 @@
+@import '../../../../../../app_storefront_base/cartridge/client/default/scss/product/detail';
+
+.primary-images {
+    position: relative;
+}
+
+.product-badges {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    list-style: none;
+    padding-left: 0;
+
+    li {
+        padding: 5px 15px;
+        background-color: #00ff00;
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .Bestseller {
+        background-color: #00fff0;
+    }
+
+    .product-badges .Exclusive {
+        background-color: #ff0f00;
+    }
+
+    .product-badges .New {
+        background-color: #f0ff00;
+    }
+
+    .product-badges .Sale {
+        background-color: #00ff00;
+    }
+}
+
+.product-detail {
+    .attributes {
+        .swatch-square {
+            width: 2.5em;
+            height: 2.5em;
+            background: #fff;
+            border: 0.1em solid rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            margin-right: 0.313em;
+            position: relative;
+            display: flex;
+            align-content: stretch;
+            justify-content: center;
+            align-items: center;
+
+            &::after {
+                content: '';
+            }
+
+            &.selected {
+                border-color: #333;
+            }
+
+            &.unselectable {
+                background-color: #495057;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .modal {
+        background: rgba(0, 0, 0, 0.3);
+
+        &.show {
+            display: block;
+        }
+
+        .modal-content {
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+    }
+
+    .quantity-form {
+        align-items: center;
+    }
+
+    .quantity-input {
+        width: 2.5rem;
+        padding: 0;
+        border: none;
+        text-align: center;
+
+        &:disabled {
+            background: none;
+        }
+    }
+
+    .quantity-button {
+        text-align: center;
+        justify-content: center;
+        height: 1.875rem;
+        width: 1.875rem;
+        background: none;
+        border: 1px solid #444;
+    }
+}
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}

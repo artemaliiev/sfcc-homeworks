@@ -28,17 +28,17 @@ function getPidValue($el) {
 function getQuantitySelector($el) {
     var quantitySelected;
     if ($el && $('.set-items').length) {
-        quantitySelected = $($el).closest('.product-detail').find('.quantity-select');
+        quantitySelected = $($el).closest('.product-detail').find('.js-quantity-input');
     } else if ($el && $('.product-bundle').length) {
-        var quantitySelectedModal = $($el).closest('.modal-footer').find('.quantity-select');
-        var quantitySelectedPDP = $($el).closest('.bundle-footer').find('.quantity-select');
+        var quantitySelectedModal = $($el).closest('.modal-footer').find('.js-quantity-input');
+        var quantitySelectedPDP = $($el).closest('.bundle-footer').find('.js-quantity-input');
         if (quantitySelectedModal.val() === undefined) {
             quantitySelected = quantitySelectedPDP;
         } else {
             quantitySelected = quantitySelectedModal;
         }
     } else {
-        quantitySelected = $('.quantity-select');
+        quantitySelected = $('.js-quantity-input');
     }
     return quantitySelected;
 }
@@ -134,7 +134,7 @@ function processNonSwatchValues(attr, $productContainer) {
  */
 function updateAttrs(attrs, $productContainer, msgs) {
     // Currently, the only attribute type that has image swatches is Color.
-    var attrsWithSwatches = ['color'];
+    var attrsWithSwatches = ['color', 'size'];
 
     attrs.forEach(function (attr) {
         if (attrsWithSwatches.indexOf(attr.id) > -1) {
@@ -219,7 +219,7 @@ function getAttributesHtml(attributes) {
  * @param {jQuery} $productContainer - DOM element for current product
  */
 function updateOptions(optionsHtml, $productContainer) {
-	// Update options
+    // Update options
     $productContainer.find('.product-options').empty().html(optionsHtml);
 }
 
@@ -322,14 +322,11 @@ function handleVariantResponse(response, $productContainer) {
  * @param {UpdatedQuantity[]} quantities -
  * @param {jQuery} $productContainer - DOM container for a given product
  */
-function updateQuantities(quantities, $productContainer) {
+function updateQuantities(quantityInput, $productContainer) {
     if ($productContainer.parent('.bonus-product-item').length <= 0) {
-        var optionsHtml = quantities.map(function (quantity) {
-            var selected = quantity.selected ? ' selected ' : '';
-            return '<option value="' + quantity.value + '"  data-url="' + quantity.url + '"' +
-                selected + '>' + quantity.value + '</option>';
-        }).join('');
-        getQuantitySelector($productContainer).empty().html(optionsHtml);
+        const quantitySelector = getQuantitySelector($productContainer);
+        quantitySelector.data('url', quantityInput.url);
+        quantitySelector.val(quantityInput.value);
     }
 }
 
@@ -350,7 +347,7 @@ function attributeSelect(selectedValueUrl, $productContainer) {
             success: function (data) {
                 handleVariantResponse(data, $productContainer);
                 updateOptions(data.product.optionsHtml, $productContainer);
-                updateQuantities(data.product.quantities, $productContainer);
+                updateQuantities(data.product.quantityInput, $productContainer);
                 $('body').trigger('product:afterAttributeSelect',
                     { data: data, container: $productContainer });
                 $.spinner().stop();
@@ -580,7 +577,21 @@ module.exports = {
     colorAttribute: function () {
         $(document).on('click', '[data-attr="color"] button', function (e) {
             e.preventDefault();
+            if ($(this).attr('disabled')) {
+                return;
+            }
+            var $productContainer = $(this).closest('.set-item');
+            if (!$productContainer.length) {
+                $productContainer = $(this).closest('.product-detail');
+            }
 
+            attributeSelect($(this).attr('data-url'), $productContainer);
+        });
+    },
+
+    sizeAttribute: function () {
+        $(document).on('click', '.js-size-attr button', function (e) {
+            e.preventDefault();
             if ($(this).attr('disabled')) {
                 return;
             }
@@ -606,16 +617,34 @@ module.exports = {
     },
 
     availability: function () {
-        $(document).on('change', '.quantity-select', function (e) {
+        $(document).on('click', '.js-quantity-button', function (e) {
             e.preventDefault();
+            const productQuantityInput = $(this).closest('.product-detail').find('.js-quantity-input');
+            const minQuantity = parseInt(productQuantityInput.data('minqty'));
+            const maxQuantity = parseInt(productQuantityInput.data('maxqty'));
+            let url = productQuantityInput.data('url');
+            let productQuantity = parseInt(productQuantityInput.val());
 
-            var $productContainer = $(this).closest('.product-detail');
+            if ($(this).hasClass('quantity-increase')) {
+                if (productQuantity === maxQuantity) {
+                    return;
+                }
+                productQuantity++;
+            } else if ($(this).hasClass('quantity-decrease')) {
+                if (productQuantity === minQuantity) {
+                    return;
+                }
+                productQuantity--;
+            }
+            url = `${url}&quantity=${productQuantity}`;
+
+            let $productContainer = $(this).closest('.product-detail');
             if (!$productContainer.length) {
                 $productContainer = $(this).closest('.modal-content').find('.product-quickview');
             }
 
             if ($('.bundle-items', $productContainer).length === 0) {
-                attributeSelect($(e.currentTarget).find('option:selected').data('url'),
+                attributeSelect(url,
                     $productContainer);
             }
         });
@@ -699,18 +728,18 @@ module.exports = {
             var valueId = $choiceOfBonusProduct.find('.options-select option:selected').data('valueId');
             if (totalQty <= maxPids) {
                 var selectedBonusProductHtml = ''
-                + '<div class="selected-pid row" '
-                + 'data-pid="' + pid + '"'
-                + 'data-qty="' + submittedQty + '"'
-                + 'data-optionID="' + (optionID || '') + '"'
-                + 'data-option-selected-value="' + (valueId || '') + '"'
-                + '>'
-                + '<div class="col-sm-11 col-9 bonus-product-name" >'
-                + $choiceOfBonusProduct.find('.product-name').html()
-                + '</div>'
-                + '<div class="col-1"><i class="fa fa-times" aria-hidden="true"></i></div>'
-                + '</div>'
-                ;
+                    + '<div class="selected-pid row" '
+                    + 'data-pid="' + pid + '"'
+                    + 'data-qty="' + submittedQty + '"'
+                    + 'data-optionID="' + (optionID || '') + '"'
+                    + 'data-option-selected-value="' + (valueId || '') + '"'
+                    + '>'
+                    + '<div class="col-sm-11 col-9 bonus-product-name" >'
+                    + $choiceOfBonusProduct.find('.product-name').html()
+                    + '</div>'
+                    + '<div class="col-1"><i class="fa fa-times" aria-hidden="true"></i></div>'
+                    + '</div>'
+                    ;
                 $('#chooseBonusProductModal .selected-bonus-products').append(selectedBonusProductHtml);
                 $('.pre-cart-products').html(totalQty);
                 $('.selected-bonus-products .bonus-summary').removeClass('alert-danger');

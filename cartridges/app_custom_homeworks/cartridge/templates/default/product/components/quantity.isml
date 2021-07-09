@@ -1,0 +1,8 @@
+<label for="quantity-1">${Resource.msg('label.quantity', 'common', null)}</label>
+<div class="quantity-form d-flex">
+    <button class="js-quantity-button quantity-button quantity-decrease">-</button>
+    <input type="text" class="js-quantity-input quantity-input form-control" id="quantity-1" disabled="disabled" name="quantity"
+        data-url="${product.quantityInput.url}" data-minqty="${product.minOrderQuantity}"
+        data-maxqty="${product.maxOrderQuantity}" value="${product.quantityInput.value}">
+    <button class="js-quantity-button quantity-button quantity-increase">+</button>
+</div>
