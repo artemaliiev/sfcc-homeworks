@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="RefArchSharedLibrary">
+    <folder folder-id="categoryTiles">
+        <display-name xml:lang="x-default">Category Tiles</display-name>
+        <online-flag>false</online-flag>
+        <parent>root</parent>
+        <page-attributes/>
+        <attribute-groups>
+            <attribute-group group-id="categoryTiles">
+                <display-name xml:lang="x-default">categoryTiles</display-name>
+                <attribute attribute-id="imageTileA" system="false"/>
+                <attribute attribute-id="titleTileA" system="false"/>
+                <attribute attribute-id="descriptionTileA" system="false"/>
+                <attribute attribute-id="btnTextTileA" system="false"/>
+                <attribute attribute-id="btnUrlTileA" system="false"/>
+                <attribute attribute-id="alignmentTileA" system="false"/>
+            </attribute-group>
+        </attribute-groups>
+    </folder>
+
+    <content content-id="cat-tiles-mens-a">
+        <display-name xml:lang="x-default">Category tiles mens a</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>true</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="alignmentTileA">left</custom-attribute>
+            <custom-attribute attribute-id="btnTextTileA">Discover the selection</custom-attribute>
+            <custom-attribute attribute-id="btnUrlTileA">$url('Search-Show','cgid','mens-accessories-ties')$</custom-attribute>
+            <custom-attribute attribute-id="descriptionTileA">Layers of warmth Layers of warmth Layers of warmth Layers of warmth Layers of warmth Layers of warmth Layers of warmth Layers of warmth Layers of warmth Layers of warmth</custom-attribute>
+            <custom-attribute attribute-id="imageTileA">tile-1.jpg</custom-attribute>
+            <custom-attribute attribute-id="titleTileA">Layers of warmth</custom-attribute>
+        </custom-attributes>
+        <folder-links>
+            <classification-link folder-id="categoryTiles"/>
+        </folder-links>
+    </content>
+
+    <content content-id="cat-tiles-mens-a2">
+        <display-name xml:lang="x-default">Category tiles mens a2</display-name>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="alignmentTileA">right</custom-attribute>
+            <custom-attribute attribute-id="btnTextTileA">Discover more</custom-attribute>
+            <custom-attribute attribute-id="btnUrlTileA">$url('Search-Show','cgid','mens-accessories-ties')$</custom-attribute>
+            <custom-attribute attribute-id="descriptionTileA">Test collection description test collection description test collection description test collection description test collection description test collection description test collection description</custom-attribute>
+            <custom-attribute attribute-id="imageTileA">tile-2.jpg</custom-attribute>
+            <custom-attribute attribute-id="titleTileA">Test collection</custom-attribute>
+        </custom-attributes>
+        <folder-links>
+            <classification-link folder-id="categoryTiles"/>
+        </folder-links>
+    </content>
+
+</library>
