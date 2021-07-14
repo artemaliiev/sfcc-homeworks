@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="storefront-catalog-m-en">
+
+    <category category-id="mens">
+        <display-name xml:lang="x-default">Mens</display-name>
+        <display-name xml:lang="fr-FR">Homme</display-name>
+        <display-name xml:lang="it-IT">Uomo</display-name>
+        <display-name xml:lang="ja-JP">メンズ</display-name>
+        <display-name xml:lang="zh-CN">男士</display-name>
+        <online-flag>true</online-flag>
+        <parent>root</parent>
+        <position>11.0</position>
+        <template>rendering/category/newCatLanding</template>
+        <page-attributes>
+            <page-title xml:lang="x-default">Men's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
+            <page-title xml:lang="fr-FR">Chaussures, vêtements d'extérieur, vêtements et accessoires pour homme</page-title>
+            <page-title xml:lang="it-IT">Calzature, giacche e cappotti, abbigliamento e accessori uomo</page-title>
+            <page-title xml:lang="ja-JP">メンズフットウェア、アウターウェア、衣料、アクセサリー</page-title>
+            <page-title xml:lang="zh-CN">男鞋、男装外套、男装及配件</page-title>
+            <page-description xml:lang="x-default">Men's range. Hard-wearing boots, jackets and clothing for unbeatable comfort day in, day out. Practical, easy-to-wear styles wherever you're headed.</page-description>
+            <page-description xml:lang="fr-FR">Gamme homme. Une ligne de pièces (bottes, vestes, etc.) résistantes aux intempéries pour un confort inégalable jour après jour. Des styles pratiques et faciles à porter peu importe où vous allez.</page-description>
+            <page-description xml:lang="it-IT">Gamma di prodotti per uomo. Stivali, giacche e capi di abbigliamento resistenti che offrono comodità e praticità tutti i giorni, ogni giorno. Stili pratici e facili da portare in tutte le occasioni.</page-description>
+            <page-description xml:lang="ja-JP">メンズコーナー耐摩耗性ブーツ、ジャケット、その他衣料。最強に着心地良くデイリーに活躍します。どこへ行く場合でも、実用的で着こなしやすいスタイルです。</page-description>
+            <page-description xml:lang="zh-CN">男士系列。耐磨的靴子、外套和其他服装均可时时刻刻带给您无与伦比的舒适体验。无论您出现在何种场合，均可为您打造实用而舒适的风格。</page-description>
+            <page-keywords xml:lang="x-default">mens boots, mens shoes, mens clothing, mens apparel, mens jackets</page-keywords>
+            <page-keywords xml:lang="fr-FR">bottines hommes, chaussures hommes, vêtements homme, habillement homme, vestes homme</page-keywords>
+            <page-keywords xml:lang="it-IT">stivali uomo, scarpe uomo, vestiario uomo, abbigliamento uomo, giacche uomo</page-keywords>
+            <page-keywords xml:lang="ja-JP">メンズブーツ、メンズシューズ、メンズ衣料、メンズアパレル、メンズジャケット</page-keywords>
+            <page-keywords xml:lang="zh-CN">男士靴子、男鞋、男士服装、男装配件、男士夹克</page-keywords>
+        </page-attributes>
+        <custom-attributes>
+            <custom-attribute attribute-id="enableCompare">true</custom-attribute>
+            <custom-attribute attribute-id="headerMenuBanner">&lt;img alt="Men's Category Image" src="images/slot/landing/cat-landing-slotbanner-mens.jpg?$staticlink$" width="433" /&gt;</custom-attribute>
+            <custom-attribute attribute-id="headerMenuOrientation">Horizontal</custom-attribute>
+            <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-mens.jpg</custom-attribute>
+        </custom-attributes>
+        <refinement-definitions>
+            <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
+        </refinement-definitions>
+    </category>
+
+</catalog>

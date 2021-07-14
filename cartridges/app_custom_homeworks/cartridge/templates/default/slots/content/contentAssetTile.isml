@@ -1,0 +1,24 @@
+<isif condition="${slotcontent != null}">
+    <isloop items="${slotcontent.content}" var="contentAsset">
+        <div class="
+            row align-items-center mb-5
+            ${contentAsset.custom.alignmentTileA == 'right' ? 'flex-lg-row-reverse' : ''}
+            "
+            >
+            <div class="col-6">
+                <img class="img-fluid" src="${contentAsset.custom.imageTileA.getURL()}" alt="">
+            </div>
+            <div class="col-6 text-center">
+                <h2>
+                    <isprint value="${contentAsset.custom.titleTileA}" encoding="off" />
+                </h2>
+                <p>
+                    <isprint value="${contentAsset.custom.descriptionTileA}" encoding="off" />
+                </p>
+                <a href="${contentAsset.custom.btnUrlTileA}" class="btn btn-primary">
+                    <isprint value="${contentAsset.custom.btnTextTileA}" encoding="off" />
+                </a>
+            </div>
+        </div>
+    </isloop>
+</isif>
