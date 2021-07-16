@@ -1,0 +1,17 @@
+{
+    "step-types": {
+        "script-module-step": [
+            {
+                "@type-id": "custom.sendEmailSubscription",
+                "@supports-parallel-execution": "true",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Sending emails to users afer subscription",
+                "module": "app_custom_homeworks/cartridge/scripts/steps/sendEmailSubscription.js",
+                "function": "sendEmailSubscription",
+                "transactional": "false",
+                "timeout-in-seconds": "900"
+            }
+        ]
+    }
+}
