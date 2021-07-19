@@ -1,1 +1,1 @@
-test
+Hello, ${pdict.name}. To confirm your subscription click this link: ${pdict.submitionUrl}

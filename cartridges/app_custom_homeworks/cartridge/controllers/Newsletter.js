@@ -1,10 +1,13 @@
-/**
- * A simple form controller.
- *
- */
 'use strict';
+
 const server = require('server');
 
+/**
+ * Newsletter-Start: Subscription form
+ * @name Newsletter-Start
+ * @function
+ * @memberof Newsletter
+ */
 server.get('Start', server.middleware.https, function (req, res, next) {
     const URLUtils = require('dw/web/URLUtils');
     const actionUrl = URLUtils.url('Newsletter-Handler');
@@ -17,6 +20,14 @@ server.get('Start', server.middleware.https, function (req, res, next) {
     next();
 });
 
+/**
+ * Newsletter-Handler: Checking data from form and creting new custom object
+ * @name Newsletter-Handler
+ * @function
+ * @memberof Newsletter
+ * @param {httpparameter} - user name and email
+ * @param {returns} - json
+ */
 server.post('Handler', server.middleware.https, function (req, res, next) {
     const Resource = require('dw/web/Resource');
 
@@ -38,19 +49,24 @@ server.post('Handler', server.middleware.https, function (req, res, next) {
             const Transaction = require('dw/system/Transaction');
 
             const UUID = createUUID();
-
-            // checkExistingEmail(email);
-
-            Transaction.wrap(function () {
-                const customObject = CustomObjectMgr.createCustomObject('NewsletterSubscription', UUID);
-                customObject.custom.name = name;
-                customObject.custom.email = email;
-                customObject.custom.status = 'NEW';
-            });
-            res.json({
-                success: true,
-                redirectUrl: URLUtils.url('Newsletter-Success').toString()
-            });
+            const emailExist = checkExistingEmail(email);
+            if (emailExist) {
+                Transaction.wrap(function () {
+                    const customObject = CustomObjectMgr.createCustomObject('NewsletterSubscription', UUID);
+                    customObject.custom.name = name;
+                    customObject.custom.email = email;
+                    customObject.custom.status = 'NEW';
+                });
+                res.json({
+                    success: true,
+                    redirectUrl: URLUtils.url('Newsletter-Success').toString()
+                });
+            } else {
+                res.json({
+                    error: true,
+                    msg: Resource.msg(email + ' already exist', '', null)
+                });
+            }
 
         } else {
             res.json({
@@ -62,12 +78,62 @@ server.post('Handler', server.middleware.https, function (req, res, next) {
     next();
 });
 
+/**
+ * Newsletter-Success: Rendering success page
+ * @name Newsletter-Success
+ * @function
+ * @memberof Newsletter
+ * @param {httpparameter} - user name
+ */
 server.get('Success', server.middleware.https, function (req, res, next) {
     const name = req.form.name;
     const newsletterForm = server.forms.getForm('newsletterSubscription');
     res.render('newsletterSubscription/newsletterSuccess', {
         newsletterForm: newsletterForm
     });
+    next();
+});
+
+/**
+ * Newsletter-Confirmation: Confirming email and changing custom object
+ * @name Newsletter-Confirmation
+ * @function
+ * @memberof Newsletter
+ * @param {httpparameter} - UUID of custom object
+ */
+server.get('Confirmation', server.middleware.https, function (req, res, next) {
+    const CustomObjectMgr = require('dw/object/CustomObjectMgr');
+
+    const uuid = req.querystring.uuid;
+    const customObject = CustomObjectMgr.getCustomObject('NewsletterSubscription', uuid);
+
+    let message = '';
+
+    if (customObject) {
+        if (customObject.custom.status === 'CONFIRMED') {
+            res.render('newsletterSubscription/newsletterConfirmationSame', {
+                name: customObject.custom.name
+            });
+        } else if (customObject.custom.status === 'SENT') {
+            const Transaction = require('dw/system/Transaction');
+
+            Transaction.wrap(function () {
+                customObject.custom.status = 'CONFIRMED';
+            });
+            res.render('newsletterSubscription/newsletterConfirmationSuccess', {
+                name: customObject.custom.name
+            });
+        }
+    } else {
+        const URLUtils = require('dw/web/URLUtils');
+
+        const actionUrl = URLUtils.abs('Newsletter-Start').toString();
+
+        res.render('newsletterSubscription/newsletterConfirmationError', {
+            actionUrl: actionUrl
+        });
+    }
+
     next();
 });
 
@@ -80,19 +146,13 @@ function createUUID() {
     return new Date().getTime().toString();
 }
 
-// function checkExistingEmail(email) {
-//     const Transaction = require('dw/system/Transaction');
-//     const customObjectMgr = require('dw/object/CustomObjectMgr');
+function checkExistingEmail(email) {
+    const Transaction = require('dw/system/Transaction');
+    const CustomObjectMgr = require('dw/object/CustomObjectMgr');
 
-//     Transaction.wrap(function () {
-//         const customObject = customObjectMgr.queryCustomObject('NewsletterSubscription', 'email = emaildfd@asd.asd');
-//         const customObjects = customObjectMgr.getAllCustomObjects('NewsletterSubscription');
-//         // const customObject = customObjectMgr.queryCustomObject('NewsletterSubscription', email);
-//         // customObjects.map(optionModel.options, function (option) {
+    const customObject = CustomObjectMgr.queryCustomObject('NewsletterSubscription', "custom.email = {0}", email);
 
-//         // })
-//         return customObject;
-//     });
-// }
+    return customObject ? false : true;
+}
 
 module.exports = server.exports();
