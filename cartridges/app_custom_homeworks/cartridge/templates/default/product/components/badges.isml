@@ -1,0 +1,9 @@
+<isif condition="${product.badges.value && product.badges.value.length}">
+    <ul class="product-badges">
+        <isloop items="${product.badges.value}" var="badges">
+            <li class="attribute-values ${badges}">
+                ${badges}
+            </li>
+        </isloop>
+    </ul>
+</isif>
