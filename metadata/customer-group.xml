@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customer-groups xmlns="http://www.demandware.com/xml/impex/customergroup/2007-06-30">
+    <customer-group group-id="CustomerBirthday">
+        <description>Customers who celebrate birthdays within one week get free shipping and a 50% discount on all products.</description>
+        <membership-rule>
+            <included-customers>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>customer.profile.nextBirthday</attribute-path>
+                        <operator>is-in-the-next-x-days</operator>
+                        <number-of-days>7</number-of-days>
+                    </condition>
+                </condition-group>
+            </included-customers>
+        </membership-rule>
+        <custom-attributes/>
+    </customer-group>
+
+</customer-groups>
