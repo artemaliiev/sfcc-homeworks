@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slot-configurations xmlns="http://www.demandware.com/xml/impex/slot/2008-09-08">
+
+    <slot-configuration slot-id="header-birthday-campaign" context="global" configuration-id="BestBirthdayEver" default="true" assigned-to-site="false">
+        <description>Customers who celebrate birthdays within one week get free shipping and a 50% discount on all products.</description>
+        <template>slots/content/htmlSlotContainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;div class="header-banner slide-up d-none"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="d-flex justify-content-between"&gt;
+                &lt;div&gt;&lt;/div&gt;
+                &lt;div class="content"&gt;
+&lt;div class="header-promotion"&gt;BEST BIRTHDAY EVER&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="close-button"&gt;
+                    &lt;button type="button" class="close" aria-label="Close"&gt;
+                        &lt;span aria-hidden="true"&gt;&amp;times;&lt;/span&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration-campaign-assignment slot-id="header-birthday-campaign" context="global" configuration-id="BestBirthdayEver" campaign-id="BestBirthdayEver"/>
+
+</slot-configurations>
