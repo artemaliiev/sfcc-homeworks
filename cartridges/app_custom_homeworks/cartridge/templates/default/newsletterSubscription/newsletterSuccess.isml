@@ -1,0 +1,6 @@
+<isdecorate template="common/layout/page">
+    <div class="container mt-5 mb-5">
+        <h1>Subscription confirmation</h1>
+        <p>${pdict.newsletterForm.name.value}, a confirmation email will be sent to you</p>
+    </div>
+</isdecorate>

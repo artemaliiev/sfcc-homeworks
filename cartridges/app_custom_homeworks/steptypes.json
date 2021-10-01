@@ -1,0 +1,28 @@
+{
+    "step-types": {
+        "script-module-step": [
+            {
+                "@type-id": "custom.sendEmailSubscription",
+                "@supports-parallel-execution": "true",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Sending emails to users afer subscription",
+                "module": "app_custom_homeworks/cartridge/scripts/steps/subscription.js",
+                "function": "sendEmailSubscription",
+                "transactional": "false",
+                "timeout-in-seconds": "900"
+            },
+            {
+                "@type-id": "custom.removeCustomObjectSubscription",
+                "@supports-parallel-execution": "true",
+                "@supports-site-context": "true",
+                "@supports-organization-context": "false",
+                "description": "Removing custom objects when email confirmed",
+                "module": "app_custom_homeworks/cartridge/scripts/steps/subscription.js",
+                "function": "removeCustomObjectSubscription",
+                "transactional": "false",
+                "timeout-in-seconds": "900"
+            }
+        ]
+    }
+}

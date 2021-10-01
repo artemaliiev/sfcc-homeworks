@@ -1,0 +1,6 @@
+<isdecorate template="common/layout/page">
+    <div class="container mt-5 mb-5">
+        <h1>Subscription confirmation</h1>
+        <p>We can't find your email. Try to re-subscribe via <a href="${pdict.actionUrl}">link</a></p>
+    </div>
+</isdecorate>
