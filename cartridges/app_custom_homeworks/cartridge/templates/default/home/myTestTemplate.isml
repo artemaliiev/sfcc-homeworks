@@ -1,0 +1,7 @@
+<iscache type="relative" minute="30" />
+
+<isprint value="${" Hello, World!" + Date.now()}" />
+
+<isinclude template="message/anotherMessage.isml" />
+
+<isinclude url="${URLUtils.url('MyController-ShowAnotherMessage')}"/>

@@ -1,0 +1,4 @@
+<ismodule template="/components/promotionmessage.isml"
+    name="promotionmessage"
+    attribute="message"
+/>
